@@ -1,41 +1,57 @@
-students = {}
+expenses = []
+
+def add_expense():
+    amount = float(input("Enter expense amount: "))
+    category = input("Enter category: ")
+    description = input("Enter description: ")
+
+    expense = {
+        "amount": amount,
+        "category": category,
+        "description": description
+    }
+
+    expenses.append(expense)
+    print("Expense added successfully!")
+
+
+def view_expenses():
+    if not expenses:
+        print("No expenses recorded.")
+        return
+
+    for expense in expenses:
+        print("\nAmount:", expense["amount"])
+        print("Category:", expense["category"])
+        print("Description:", expense["description"])
+
+
+def total_expense():
+    total = 0
+
+    for expense in expenses:
+        total += expense["amount"]
+
+    print("Total Expense:", total)
+
 
 while True:
-    print("\n--- Student Grade Manager ---")
-    print("1. Add Student")
-    print("2. Display Students")
-    print("3. Exit")
+    print("\n--- Expense Tracker ---")
+    print("1. Add Expense")
+    print("2. View Expenses")
+    print("3. Total Expense")
+    print("4. Exit")
 
     choice = input("Enter your choice: ")
 
     if choice == "1":
-        name = input("Enter student name: ")
-        marks = float(input("Enter marks: "))
-
-        students[name] = marks
-        print("Student added successfully!")
-
+        add_expense()
     elif choice == "2":
-        if not students:
-            print("No students added yet.")
-        else:
-            for name, marks in students.items():
-                if marks >= 90:
-                    grade = "A"
-                elif marks >= 75:
-                    grade = "B"
-                elif marks >= 60:
-                    grade = "C"
-                elif marks >= 40:
-                    grade = "D"
-                else:
-                    grade = "F"
-
-                print(f"{name}: {marks} - Grade {grade}")
-
+        view_expenses()
     elif choice == "3":
-        print("Goodbye!")
+        total_expense()
+    elif choice == "4":
+        print("Program ended.")
         break
-
     else:
         print("Invalid choice.")
